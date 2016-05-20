@@ -154,7 +154,7 @@ a new `plot` operation to your calculator. This `plot` operation takes a functio
 expression as a parameter (ie: '-2*x + 4'), and two digits representing the range
 in which the variable "x" must be evaluated. Example:
 
-```python
+```
 >>> plot = lambda *args: ...
 >>> add_new_operation(calc, operation=plot)
 >>> perform_operation(calc, 'plot', params=('-x**2', -2, 2))
