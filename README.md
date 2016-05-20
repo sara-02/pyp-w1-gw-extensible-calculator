@@ -42,7 +42,7 @@ If you reached this point, you should now be ready to start coding your calculat
 To create a new calculator you must follow this interface:
 
 ```python
->>> calc = create_new_calculator(operations=(add, subtract, divide, multiply))
+>>> calc = create_new_calculator(operations={'add': add, 'subtract': subtract, ...})
 {
     'operations': {
         'add': add,
@@ -50,8 +50,8 @@ To create a new calculator you must follow this interface:
         ...
     },
     'history': [
-        ('add', (1, 2, 3, 4), '2016-05-18 12:00:00'),
-        ('multiply', (1, 2, 3, 4), '2016-05-18 12:10:00'),
+        ('2016-05-18 12:00:00', 'add', (1, 2, 3, 4), 10),
+        ('2016-05-18 12:10:00', 'multiply', (1, 2, 3, 4), 24),
         ...
     ]
 }
@@ -85,27 +85,79 @@ To do that, you must implement the following method:
 
 ```python
 >>> square_root = lambda ...
->>> add_new_operation(calc, operation=square_root)
+>>> add_new_operation(calc, operation={'square_root': square_root})
 ```
+If at any time you need to know the whole list of supported operations, you
+can invoke the `get_operations` method on the calculator, which will return
+a collection of the operation names:
 
+```python
 >>> get_operations(calc)
 ['add', 'subtract', 'divide', 'multiply']
+```
 
+The calculator must be smart enough to keep track of the list of operations
+the user has executed since the last reset. For each operation in the history
+you must record the operation name, the collection of arguments the user sent
+and a datetime object representing the execution time.
+
+To query the history of executed operations, just call the `get_history` method:
+
+```python
 >>> get_history(calc)
->>> reset_history(calc)
+[
+    ('2016-05-18 12:00:00', 'add', (1, 2, 3, 4), 10),
+    ('2016-05-18 12:10:00', 'multiply', (1, 2, 3, 4), 24),
+    ...
+]
+```
 
+Reseting the history is also possible by executing the `reset_history` method:
+
+```python
+>>> reset_history(calc)
+>>> get_history(calc)
+[]
+```
+
+As we keep track of all the operations we execute, it must be possible too to
+repeat the last executed action. From time to time this is useful to avoid re
+writing the whole operation command.
+
+```python
 >>> perform_operation(calc, 'subtract', params=(10, 2, 3, 4))
 1
 >>> repeat_last_operation(calc)
 1
+```
 
-# extra points: Implement a `plot` operation
->>> plot = lambda ...
+As a quick summary, this is the interface your calculator must respect:
+
+```
+create_new_calculator
+
+perform_operation
+
+add_new_operation
+
+get_operations
+
+get_history
+
+reset_history
+
+repeat_last_operation
+```
+
+If you want to get some extra points, and have some extra fun you can add
+a new `plot` operation to your calculator. This `plot` operation takes a function
+expression as a parameter (ie: '-2*x + 4'), and two digits representing the range
+in which the variable "x" must be evaluated. Example:
+
+```python
+>>> plot = lambda *args: ...
 >>> add_new_operation(calc, operation=plot)
-
 >>> perform_operation(calc, 'plot', params=('-x**2', -2, 2))
-*hint: Investigate `sympy` library*
-
 -0 |             ... ...
    |           ..       ..
    |          /           \
@@ -122,3 +174,6 @@ To do that, you must implement the following method:
    |  .                           .
 -4 | /
      -2         0              2
+```
+
+*Hint: Investigate `sympy` library*
