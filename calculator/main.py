@@ -8,7 +8,7 @@ def create_new_calculator(operations=None):
     """
     Creates a configuration dict for a new calculator. Optionally pre loads an
     initial set of operations. By default a calculator with no operations
-    is created.
+    is created. Returns a dict containing operations(dict) and history(list).
 
     :param operations: Dict with initial operations.
                        ie: {'sum': sum_function, ...}
