@@ -15,7 +15,8 @@ def _are_valid_params(params):
 
 def _save_in_history(calc, operation, params, result):
     calc['history'].append(
-        (datetime.now().strftime('%Y-%m-%d %H:%M:%S'), operation, params, result))
+        (datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+         operation, params, result))
 
 
 def create_new_calculator(operations=None):
@@ -37,8 +38,8 @@ def create_new_calculator(operations=None):
 
 def perform_operation(calc, operation, params):
     """
-    Executes given operation with given params. It returns the result of the
-    operation execution.
+    Executes given operation with given params.
+    It returns the result of the operation execution.
     :param calc: A calculator.
     :param operation: String with the operation name. ie: 'add'
     :param params: Tuple containing the list of nums to operate with.
@@ -56,7 +57,8 @@ def perform_operation(calc, operation, params):
 
 def add_new_operation(calc, operation):
     """
-    Adds given operation to the list of supported operations for given calculator.
+    Adds given operation to the list of supported
+    operations for given calculator.
     :param calc: A calculator.
     :param operation: Dict with the single operation to be added.
                       ie: {'add': add_function}
@@ -70,7 +72,7 @@ def get_operations(calc):
     """
     Returns the list of operation names supported by given calculator.
     """
-    return calc['operations'].keys()
+    return list(calc['operations'].keys())
 
 
 def get_history(calc):
