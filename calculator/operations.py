@@ -1,3 +1,10 @@
+try:
+    from functools import reduce
+except ImportError:
+    # Py2
+    pass
+
+
 def add(*args):
     # your implementation here
     return sum(args)
