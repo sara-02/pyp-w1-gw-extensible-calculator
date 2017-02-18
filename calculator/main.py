@@ -13,7 +13,10 @@ def create_new_calculator(operations=None):
     :param operations: Dict with initial operations.
                        ie: {'sum': sum_function, ...}
     """
-    pass
+    calc = {
+        'operations': operations,
+        'history': []
+    }
 
 
 def perform_operation(calc, operation, params):

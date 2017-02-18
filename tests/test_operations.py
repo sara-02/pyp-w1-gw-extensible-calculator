@@ -34,4 +34,11 @@ class TestCalculatorOperations(unittest.TestCase):
         self.assertEqual(divide(10, -2), -5)
         self.assertEqual(divide(12, 2, 3), 2)
 
-    # implement extra tests for your custom operations
+    # extra tests for your custom operations
+    def test_exponent(self):
+        self.assertEqual(exponent(1), 1)
+        self.assertEqual(exponent(4, 2), 16)
+        self.assertEqual(exponent(2, 3, 5), 32768)
+        self.assertEqual(exponent(8, 0, 9, 7), 1)
+        self.assertEqual(exponent(2, -2), 0.25)
+        self.assertEqual(exponent(-2, -3, 2),  0.015625)
