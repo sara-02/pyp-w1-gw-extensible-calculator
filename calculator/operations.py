@@ -59,7 +59,7 @@ def div_modulo(*args):
     '''
     if len(args) == 1:
         return args[0]
-    remainder = 1
+    remainder = args[0]
     for value in args[1:]:
         remainder %= value
     return remainder

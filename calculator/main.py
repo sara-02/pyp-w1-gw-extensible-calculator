@@ -68,7 +68,7 @@ def reset_history(calc):
     """
     Resets the calculator history back to an empty list.
     """
-    pass
+    return calc['history'] = []
 
 
 def repeat_last_operation(calc):

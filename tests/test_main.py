@@ -89,7 +89,8 @@ class TestCalculator(unittest.TestCase):
         perform_operation(self.calc, 'add', (1, 2))
         # sleep 1 second to make enough separation between one
         # operation and the next one
-        import time; time.sleep(1)
+        import time
+        time.sleep(1)
         perform_operation(self.calc, 'add', (5, 10))
         history = get_history(self.calc)
         # last operations must be appended at the end of the history list
